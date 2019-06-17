@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Freelancing App</string>
+    <string name="employee">employee</string>
+    <string name="employer">employer</string>
+</resources>
