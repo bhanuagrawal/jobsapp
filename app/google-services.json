@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "399871869766",
+    "firebase_url": "https://freelancingapp-b92f3.firebaseio.com",
+    "project_id": "freelancingapp-b92f3",
+    "storage_bucket": "freelancingapp-b92f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399871869766:android:8b6dcf1bbdd5430f",
+        "android_client_info": {
+          "package_name": "com.dabblepoint.freelancingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399871869766-u9k13e9js9iipqa2mq6dho6b3oc92uvu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dabblepoint.freelancingapp",
+            "certificate_hash": "3933b02c1c405f84405dbb82a8aab902f6e4cd99"
+          }
+        },
+        {
+          "client_id": "399871869766-rs2q4emmipvqige6ocau98nfj91t3a3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk6BCnoH5N2oY-yvtIGamsQrgej-oOAE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399871869766-rs2q4emmipvqige6ocau98nfj91t3a3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

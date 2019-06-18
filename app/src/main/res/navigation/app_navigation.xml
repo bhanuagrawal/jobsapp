@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/app_navigation"
+            app:startDestination="@id/userDetailFragment">
+
+    <fragment android:id="@+id/userDetailFragment" android:name="com.dabblepoint.freelancingapp.ui.UserDetailFragment"
+              android:label="user_detail_fragment" tools:layout="@layout/user_detail_fragment">
+        <action android:id="@+id/action_userDetailFragment_to_createWork" app:destination="@id/createWork"/>
+        <action android:id="@+id/action_userDetailFragment_to_works" app:destination="@id/works"/>
+    </fragment>
+    <fragment android:id="@+id/createWork" android:name="com.dabblepoint.freelancingapp.ui.CreateWork"
+              android:label="create_work_fragment" tools:layout="@layout/create_work_fragment">
+        <action android:id="@+id/action_createWork_to_works" app:destination="@id/works"/>
+    </fragment>
+    <fragment android:id="@+id/works" android:name="com.dabblepoint.freelancingapp.ui.ProjectList" android:label="works_fragment"
+              tools:layout="@layout/works_fragment"/>
+
+</navigation>
