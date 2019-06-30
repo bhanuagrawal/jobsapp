@@ -45,6 +45,7 @@ class UserDetailFragment : Fragment() {
     }
 
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentInteractionListner) {
@@ -75,8 +76,8 @@ class UserDetailFragment : Fragment() {
                         if(user is User){
                             mainViewModel.user.postValue(user)
                             when(user.role){
-                                getString(R.string.employee) -> listener?.navigateTo(R.id.action_userDetailFragment_to_works)
-                                getString(R.string.employer) -> listener?.navigateTo(R.id.action_userDetailFragment_to_createWork)
+                                getString(R.string.employee) -> listener?.navigateTo(R.id.works)
+                                getString(R.string.employer) -> listener?.navigateTo(R.id.works)
                             }
                         }
 

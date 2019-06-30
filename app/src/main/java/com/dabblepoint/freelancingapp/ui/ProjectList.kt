@@ -8,9 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dabblepoint.freelancingapp.R
+import com.dabblepoint.freelancingapp.models.Project
+import com.dabblepoint.freelancingapp.ui.adapters.ItemAdapter
+import com.dabblepoint.freelancingapp.ui.adapters.ProjectsAdapter
 import com.dabblepoint.freelancingapp.viewmodels.MainViewModel
 import com.dabblepoint.freelancingapp.viewmodels.ProjectListViewModel
+import kotlinx.android.synthetic.main.works_fragment.*
 
 
 class ProjectList : Fragment() {
@@ -19,8 +24,14 @@ class ProjectList : Fragment() {
         fun newInstance() = ProjectList()
     }
 
+    private lateinit var adapter: ItemAdapter<Project>
     private lateinit var mainViewModel: MainViewModel
     private lateinit var viewModel: ProjectListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = ProjectsAdapter(R.layout.project, arrayListOf())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,25 +42,36 @@ class ProjectList : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        projects.layoutManager = LinearLayoutManager(context)
+        projects.adapter = adapter
+
+
         activity?.let {
             mainViewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
         }
+
 
         viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
         mainViewModel.user.value?.let {
 
             viewModel.getProjectsCreatedBy(it).observe(this, Observer { projects ->
 
-                Log.d("projects", projects.toString())
+                projects?.let {
+                    Log.d("projects", projects.toString())
 
-                projects?.forEach { project ->
+                    adapter.onDataChange(projects)
 
-                    project.requests.observe(this, Observer { workRequests ->
+                    projects.forEach { project ->
 
-                        Log.d("work requests", project.title + " " + workRequests.toString())
+                        project.requests.observe(this, Observer { workRequests ->
 
-                    })
+                            Log.d("work requests", project.title + " " + workRequests.toString())
+
+                        })
+                    }
                 }
+
+
 
             })
 
@@ -57,5 +79,7 @@ class ProjectList : Fragment() {
 
         }
     }
+
+
 
 }

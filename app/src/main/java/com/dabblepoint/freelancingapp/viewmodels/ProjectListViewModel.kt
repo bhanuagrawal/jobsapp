@@ -9,12 +9,22 @@ import com.dabblepoint.freelancingapp.models.User
 
 class ProjectListViewModel : ViewModel() {
 
+    init {
+        print("hello")
+    }
+
     private val repo: Repo = Repo()
 
-    val projectsFetchStatus: MutableLiveData<RequestStatus> = MutableLiveData()
+    private val projectsFetchStatus: MutableLiveData<RequestStatus>
+        get() = MutableLiveData()
+    private val projects: MutableLiveData<ArrayList<Project>> = MutableLiveData()
 
     fun getProjectsCreatedBy(user: User): MutableLiveData<ArrayList<Project>>{
-        return repo.getProjectsCreatedBy(user, projectsFetchStatus)
+        if(projects.value == null){
+            projects.value = arrayListOf()
+            repo.getProjectsCreatedBy(user, projects, projectsFetchStatus)
+        }
+        return projects
     }
     // TODO: Implement the ViewModel
 }

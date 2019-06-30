@@ -17,7 +17,6 @@ class Repo{
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val TAG: String = "Repo"
     private val projectsLiveData: MutableLiveData<ArrayList<Project>> = MutableLiveData()
-    private val createdBrojectsLiveData: MutableLiveData<ArrayList<Project>> = MutableLiveData()
 
     fun createUser(name: String, mob: String, role: String, status: MutableLiveData<RequestStatus>){
 
@@ -122,10 +121,9 @@ class Repo{
 
     fun getProjects(): MutableLiveData<ArrayList<Project>>{
 
-        val works = arrayListOf<Project>()
         db.collection("projects")
             .addSnapshotListener{ documents, e ->
-
+                val works = arrayListOf<Project>()
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
                     return@addSnapshotListener
@@ -169,11 +167,13 @@ class Repo{
 
     fun getProjectsCreatedBy(
         user: User,
+        projectsLiveData: MutableLiveData<ArrayList<Project>>,
         status: MutableLiveData<RequestStatus>
-    ): MutableLiveData<ArrayList<Project>>{
-        val projects = arrayListOf<Project>()
+    ){
         db.collection("projects").whereEqualTo("created_by", user.mob)
             .addSnapshotListener{ documents, e ->
+
+                val projects = arrayListOf<Project>()
 
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
@@ -192,14 +192,12 @@ class Repo{
                     getWorkRequests(project)
                 }
 
-                createdBrojectsLiveData.postValue(projects)
+                projectsLiveData.postValue(projects)
 
             }
-
-        return createdBrojectsLiveData
     }
 
-    fun getWorkRequests(project: Project){
+    private fun getWorkRequests(project: Project){
 
         val workRequests = arrayListOf<WorkRequest>()
         db.collection("project_requests")
