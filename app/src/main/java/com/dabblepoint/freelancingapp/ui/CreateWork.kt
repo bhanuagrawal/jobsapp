@@ -79,8 +79,6 @@ class CreateWork : Fragment() {
                 RequestStatus.Status.REQUESTED -> post.isClickable = false
             }
         })
-
-        // TODO: Use the ViewModel
     }
 
 }
